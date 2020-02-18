@@ -35,7 +35,7 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
                     <ListItem component="" key={-2} alignItems="flex-start">
                         <ListItemText primary={'Loading, Please Wait ...'} primaryTypographyProps={{ variant: 'h6' }} />
                     </ListItem>
-                 
+
                 </>}
 
                 {usersLoaded && <>
@@ -56,7 +56,7 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
                             alignItems="flex-start"
                             button
                             dense
-                            selected={user === selectedUser}
+                            selected={user.id === selectedUser.id}
                             onClick={() => {
                                 setSelectedUser(user)
                             }}
