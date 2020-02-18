@@ -1,4 +1,5 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Typography, IconButton} from '@material-ui/core';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { useEffect, useState } from 'react';
 import { allUsers, filterUsersByName } from '../api/people';
@@ -10,7 +11,7 @@ function UserDirectory() {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState();
     const [previousSearchResults, setPreviousSearchResults] = useState(new Map());
-    const mobile = useMediaQuery('(max-width:1000px)');
+    const mobile = useMediaQuery('(max-width:950px)');
     useEffect(() => {
         setUsers(allUsers);
         setUsersLoaded(true);
@@ -22,6 +23,7 @@ function UserDirectory() {
     }
 
     function handleSearch(e) {
+
         const searchQuery = e.target.value.trim();
         if (previousSearchResults.get(searchQuery)) {
             setUsers(previousSearchResults.get(searchQuery));
@@ -40,6 +42,10 @@ function UserDirectory() {
     return (
         <div className="App">
             <Grid container spacing={mobile ? 3 : 2}>
+                <Grid xs={12} align="right">
+                    <IconButton >
+                        <InsertChartIcon></InsertChartIcon>
+                    </IconButton></Grid>
                 <Grid item md={3} xs={12}>
                     <UserList
                         users={users}

@@ -44,7 +44,7 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
                             placeholder="Search"
                             variant="outlined"
                             size="small"
-                            onInput={handleSearch}
+                            onKeyUp={handleSearch}
                             InputProps={{
                                 startAdornment: <InputAdornment position="end" ><SearchIcon /></InputAdornment>,
                             }}
