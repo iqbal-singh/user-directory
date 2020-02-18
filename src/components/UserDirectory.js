@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { useEffect, useState } from 'react';
-import data from '../api/peopleAPI';
+import { allUsers, filterUsersByName } from '../api/people';
 import UserList from './UserList';
 import UserProfile from './UserProfile';
 
@@ -9,61 +10,52 @@ function UserDirectory() {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState();
     const [previousSearchResults, setPreviousSearchResults] = useState(new Map());
-
+    const mobile = useMediaQuery('(max-width:1000px)');
     useEffect(() => {
-        setUsers(data);
+        setUsers(allUsers);
         setUsersLoaded(true);
-        setSelectedUser(data[0])
+        setSelectedUser(allUsers[0])
     }, []);
-
 
     function updatePreviousSearchResults(k, v) {
         setPreviousSearchResults(new Map(previousSearchResults.set(k, v)));
     }
 
     function handleSearch(e) {
-        const searchQuery = e.target.value.trim().toLowerCase();
+        const searchQuery = e.target.value.trim();
         if (previousSearchResults.get(searchQuery)) {
             setUsers(previousSearchResults.get(searchQuery));
         }
         else
-            if (searchQuery) {
-                const filteredData = users.filter(user => {
-                    return user.first_name.toLowerCase().includes(searchQuery);
-                });
-                setUsers(filteredData);
-                updatePreviousSearchResults(searchQuery, filteredData);
-
+            if (searchQuery.length > 2) {
+                const filteredUsers = filterUsersByName(searchQuery);
+                setUsers(filteredUsers);
+                updatePreviousSearchResults(searchQuery, filteredUsers);
             }
             else {
-                setUsers(data);
+                setUsers(allUsers);
             }
     }
 
     return (
         <div className="App">
-            <Grid container spacing={1}>
-                {/* <Grid item xs={12}></Grid> */}
-                <Grid item md={3}>
+            <Grid container spacing={mobile ? 3 : 2}>
+                <Grid item md={3} xs={12}>
                     <UserList
                         users={users}
-                        setUsers={setUsers}
                         usersLoaded={usersLoaded}
                         handleSearch={handleSearch}
-                        previousSearchResults={previousSearchResults}
-                        setPreviousSearchResults={setPreviousSearchResults}
                         setSelectedUser={setSelectedUser}
                         selectedUser={selectedUser}
-                        unFilteredUsers={data}
+                        mobile={mobile}
                     />
                 </Grid>
-                <Grid item md={9}>
+                <Grid item md={9} xs={12}>
                     <UserProfile user={selectedUser} />
                 </Grid>
             </Grid>
         </div>
     );
-
 }
 
 export default UserDirectory;
