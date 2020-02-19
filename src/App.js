@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginActivity from './components/login-activity/LoginActivity';
+import LoginActivityDashboard from './components/login-activity-dashboard/LoginActivityDashboard';
 import UserDirectory from './components/user-directory/UserDirectory';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
@@ -22,7 +22,7 @@ function App() {
               <UserDirectory />
             </Route>
             <Route path="/login-activity">
-              <LoginActivity />
+              <LoginActivityDashboard />
             </Route>
             <Route>
               <UserDirectory />
