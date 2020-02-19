@@ -1,7 +1,7 @@
 import { Avatar, Card, CardContent, CardHeader, Divider, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 import React from 'react';
 const useStyles = makeStyles(theme => ({
@@ -25,10 +25,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
 function UserProfile({ user }) {
     const classes = useStyles();
-
     if (!user) { return ''; }
     else {
         return <>
@@ -44,29 +42,46 @@ function UserProfile({ user }) {
                 >
                 </CardHeader>
                 <CardContent>
-                    <Typography variant="body2"><b>First Name:</b> {user.first_name ? user.first_name : 'N/A'}</Typography>
+                    <Typography variant="body2">
+                        <b>First Name:</b> {user.first_name ? user.first_name : 'N/A'}
+                    </Typography>
                 </CardContent>
                 <Divider />
+
                 <CardContent>
-                    <Typography variant="body2"><b>Last Name:</b> {user.last_name ? user.last_name : 'N/A'}</Typography>
+                    <Typography variant="body2">
+                        <b>Last Name:</b> {user.last_name ? user.last_name : 'N/A'}
+                    </Typography>
                 </CardContent>
                 <Divider />
+
                 <CardContent>
-                    <Typography variant="body2"><b>Email Address:</b> {user.email ? <a href={`mailto:${user.email}`}>{user.email}</a> : 'N/A'}</Typography>
+                    <Typography variant="body2">
+                        <b>Email Address:</b> {user.email ? <a href={`mailto:${user.email}`}>{user.email}</a> : 'N/A'}
+                    </Typography>
                 </CardContent>
                 <Divider />
+
                 <CardContent>
-                    <Typography variant="body2"><b>City:</b> {user.city ? user.city : 'N/A'}</Typography>
+                    <Typography variant="body2">
+                        <b>City:</b> {user.city ? user.city : 'N/A'}
+                    </Typography>
                 </CardContent>
                 <Divider />
+
                 <CardContent>
-                    <Typography variant="body2"><b>State:</b> {user.state ? user.state : 'N/A'}</Typography>
+                    <Typography variant="body2">
+                        <b>State:</b> {user.state ? user.state : 'N/A'}
+                    </Typography>
                 </CardContent>
                 <Divider />
+
                 <CardContent className={classes.loginActivity}>
                     <Typography variant="body2"><b>Recent Logins:</b></Typography>
                     {user.logins.map(login => {
-                        return <Typography key={`${login.getTime()}`} variant="caption" display="block">{`${format(login, 'PPpp')}`}</Typography>
+                        return <Typography key={`${login.getTime()}`} variant="caption" display="block">
+                            {`${format(login, 'PPpp')} (${formatDistanceToNow(login, { addSuffix: 'true' })})`}
+                        </Typography>
                     })}
                 </CardContent>
             </Card>

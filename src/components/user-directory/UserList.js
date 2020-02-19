@@ -25,16 +25,16 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
     const classes = useStyles();
     return (
         <>
-            <List className={classes.list} style={{
-                height: mobile ? '300px' : '600px',
-                maxWidth: mobile ? '1000px' : '400px',
-            }}>
-                {!usersLoaded && <>
-                    <ListItem component="" key={-2} alignItems="flex-start">
-                        <ListItemText primary={'Loading, Please Wait ...'} primaryTypographyProps={{ variant: 'h6' }} />
-                    </ListItem>
+            <List
+                className={classes.list}
+                style={{
+                    height: mobile ? '300px' : '600px',
+                    maxWidth: mobile ? '1000px' : '400px',
+                }}>
 
-                </>}
+                {!usersLoaded && <ListItem component="" key={-2} alignItems="flex-start">
+                    <ListItemText primary={'Loading, Please Wait ...'} primaryTypographyProps={{ variant: 'h6' }} />
+                </ListItem>}
 
                 {usersLoaded && <>
                     <ListItem divider>
@@ -71,8 +71,7 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
                 </>
                 }
 
-                {(usersLoaded && !users.length) && <ListItem key={-1}
-                    alignItems="flex-start">
+                {(usersLoaded && !users.length) && <ListItem key={-1} alignItems="flex-start">
                     <ListItemText primary={`No Results.`} primaryTypographyProps={{ variant: 'h6' }} />
                 </ListItem>}
 
@@ -82,7 +81,6 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
     )
 }
 
-
 UserList.propTypes = {
     users: PropTypes.array,
     usersLoaded: PropTypes.bool,
@@ -90,6 +88,5 @@ UserList.propTypes = {
     setSelectedUser: PropTypes.func,
     handleSearch: PropTypes.func
 };
-
 
 export default UserList;

@@ -42,14 +42,14 @@ function UserDirectory() {
     return (
         <div className="App">
             <Grid container spacing={mobile ? 2 : 0}>
-                <Grid item xs={12} style={{height:'1px'}} align="right" >
+                {/* <Grid item xs={12} style={{height:'1px'}} align="right" >
                     <Tooltip title="Login Activity Dashboard" placement="left">
                         <Link to='/login-activity'><IconButton size="small">
                             <InsertChartIcon></InsertChartIcon>
                         </IconButton>
                         </Link>
                     </Tooltip>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12} align="left">
                     <Typography variant="h5">User Directory</Typography>
                     {!usersLoaded && <LinearProgress />}

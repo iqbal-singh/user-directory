@@ -21,9 +21,9 @@ function App() {
             <Route exact path="/">
               <UserDirectory />
             </Route>
-            <Route path="/login-activity">
+            {/* <Route path="/login-activity">
               <LoginActivityDashboard />
-            </Route>
+            </Route> */}
             <Route>
               <UserDirectory />
             </Route>

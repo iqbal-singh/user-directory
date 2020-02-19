@@ -22,6 +22,10 @@ export default function LoginActivity() {
                     </Link>
                 </Tooltip>
             </Grid>
+            <Grid item xs={12}>
+            {/* TODO:
+            Insert visualizations */}
+            </Grid>
         </Grid>
     )
 }
