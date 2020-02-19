@@ -1,7 +1,7 @@
 # User Directory App
 
 
-## View app online at https://iqbal-singh.github.io/user-directory
+## https://iqbal-singh.github.io/user-directory
 
 
 
