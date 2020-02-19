@@ -1,9 +1,9 @@
-import { Grid, IconButton, LinearProgress, Tooltip } from '@material-ui/core';
+import { Grid, IconButton, LinearProgress, Tooltip, Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { allUsers, filterUsersByName } from '../api/people';
+import { allUsers, filterUsersByName } from '../../api/people';
 import UserList from './UserList';
 import UserProfile from './UserProfile';
 
@@ -41,8 +41,8 @@ function UserDirectory() {
 
     return (
         <div className="App">
-            <Grid container spacing={mobile ? 2 : 1}>
-                <Grid item xs={12} style={{ padding: 0 }} align="right" >
+            <Grid container spacing={mobile ? 2 : 0}>
+                <Grid item xs={12} style={{height:'1px'}} align="right" >
                     <Tooltip title="Login Activity Dashboard" placement="left">
                         <Link to='/login-activity'><IconButton size="small">
                             <InsertChartIcon></InsertChartIcon>
@@ -50,7 +50,10 @@ function UserDirectory() {
                         </Link>
                     </Tooltip>
                 </Grid>
-                {!usersLoaded && <Grid item xs={12} align="left"><LinearProgress /></Grid>}
+                <Grid item xs={12} align="left">
+                    <Typography variant="h5">User Directory</Typography>
+                    {!usersLoaded && <LinearProgress />}
+                </Grid>
                 <Grid item md={3} xs={12}>
                     <UserList
                         users={users}

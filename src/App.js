@@ -1,16 +1,14 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginActivity from './components/LoginActivity';
-import UserDirectory from './components/UserDirectory';
-import { createMuiTheme , ThemeProvider} from '@material-ui/core';
+import LoginActivity from './components/login-activity/LoginActivity';
+import UserDirectory from './components/user-directory/UserDirectory';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 
 const theme = createMuiTheme({
   props: {
-    // Name of the component ⚛️
     MuiButtonBase: {
-      // The properties to apply
-      disableRipple: true, // No more ripple, on the whole application 💣!
+      disableRipple: true,
     },
   },
 });
@@ -30,7 +28,6 @@ function App() {
               <UserDirectory />
             </Route>
           </Switch>
-
         </div>
       </Router>
     </ThemeProvider>

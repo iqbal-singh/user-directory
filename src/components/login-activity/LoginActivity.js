@@ -1,7 +1,7 @@
 import { Grid, IconButton, Tooltip } from '@material-ui/core';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import React, { useState, useEffect } from 'react';
-import { allUsers } from '../api/people';
+import { allUsers } from './../../api/people';
 import { Link } from 'react-router-dom';
 export default function LoginActivity() {
     const [usersLoaded, setUsersLoaded] = useState(false);
