@@ -1,17 +1,23 @@
 # User Directory App
 
 
-## View project online at https://
+#### View app online at https://iqbal-singh.github.io/user-directory
 
 
 
-## Running the project locally
+#### Run the project locally
 
-1.) Type `npm install` <br/>
-2.)  `npm start` runs the app in the development mode.<br />
+1.) run `npm install` 
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+2.) run `npm start` to run the app in development mode <br/>
 
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
+The page will reload if you make edits. You will also see any lint errors in the console.
+
+
+
+#### Technology Used
+* React
+* Material-UI
+* Deployed to GitHub Pages
