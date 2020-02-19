@@ -41,9 +41,8 @@ function UserDirectory() {
 
     return (
         <div className="App">
-            <Grid container spacing={mobile ? 2 : 2}>
-
-                <Grid item xs={12} style={{ padding: 0 }} align="right">
+            <Grid container spacing={mobile ? 2 : 1}>
+                <Grid item xs={12} style={{ padding: 0 }} align="right" >
                     <Tooltip title="Login Activity Dashboard" placement="left">
                         <Link to='/login-activity'><IconButton size="small">
                             <InsertChartIcon></InsertChartIcon>

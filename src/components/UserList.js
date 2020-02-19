@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 const useStyles = makeStyles(theme => ({
     list: {
-        maxWidth: '400px',
-        height: '595px',
         overflowY: 'auto',
         paddingTop: '0px',
         '&::-webkit-scrollbar': {
@@ -28,7 +26,7 @@ function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, h
     return (
         <>
             <List className={classes.list} style={{
-                height: mobile ? '300px' : '595px',
+                height: mobile ? '300px' : '600px',
                 maxWidth: mobile ? '1000px' : '400px',
             }}>
                 {!usersLoaded && <>

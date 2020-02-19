@@ -6,11 +6,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 const useStyles = makeStyles(theme => ({
     card: {
-        marginLeft: '5px',
-        height: '600px'
+        marginLeft: '0px',
     },
     loginActivity: {
-        maxHeight: '200px',
+        maxHeight: '500px',
         overflow: 'auto',
         '&::-webkit-scrollbar': {
             width: '0.4em'
