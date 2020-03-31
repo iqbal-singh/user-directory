@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 const useStyles = makeStyles(theme => ({
     list: {
+        height: '600px',
         overflowY: 'auto',
         paddingTop: '0px',
         '&::-webkit-scrollbar': {
@@ -20,61 +21,48 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function UserList({ mobile, users, usersLoaded, selectedUser, setSelectedUser, handleSearch }) {
+function UserList({ users, usersLoaded, selectedUser, setSelectedUser, handleSearch }) {
 
     const classes = useStyles();
     return (
-        <>
-            <List
-                className={classes.list}
-                style={{
-                    height: mobile ? '300px' : '600px',
-                    maxWidth: mobile ? '1000px' : '400px',
-                }}>
+        <List className={classes.list}>
+            {usersLoaded && <>
+                <ListItem divider>
+                    <TextField
+                        placeholder="Search"
+                        variant="outlined"
+                        size="small"
+                        onKeyUp={handleSearch}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="end" ><SearchIcon /></InputAdornment>,
+                        }}
+                        fullWidth />
+                </ListItem>
 
-                {!usersLoaded && <ListItem key={-2} alignItems="flex-start">
-                    <ListItemText primary={'Loading, Please Wait ...'} primaryTypographyProps={{ variant: 'h6' }} />
-                </ListItem>}
-
-                {usersLoaded && <>
-                    <ListItem divider>
-                        <TextField
-                            placeholder="Search"
-                            variant="outlined"
-                            size="small"
-                            onKeyUp={handleSearch}
-                            InputProps={{
-                                startAdornment: <InputAdornment position="end" ><SearchIcon /></InputAdornment>,
-                            }}
-                            fullWidth />
+                {users.map(user => {
+                    return <ListItem
+                        key={user.id}
+                        alignItems="flex-start"
+                        button
+                        dense
+                        selected={user.id === selectedUser.id}
+                        onClick={() => { setSelectedUser(user) }}>
+                        <ListItemAvatar>
+                            <Avatar>{user.initials}</Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={user.full_name}
+                            secondary={user.email}
+                        />
                     </ListItem>
-                    {users.map(user => {
-                        return <ListItem
-                            key={user.id}
-                            alignItems="flex-start"
-                            button
-                            dense
-                            selected={user.id === selectedUser.id}
-                            onClick={() => { setSelectedUser(user) }}>
-                            <ListItemAvatar>
-                                <Avatar>{user.initials}</Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={user.full_name}
-                                secondary={!mobile && user.email}
-                            />
-                        </ListItem>
-                    })}
-                </>
-                }
+                })}
+            </>}
 
-                {(usersLoaded && !users.length) && <ListItem key={-1} alignItems="flex-start">
-                    <ListItemText primary={`No Results.`} primaryTypographyProps={{ variant: 'h6' }} />
-                </ListItem>}
+            {(usersLoaded && !users.length) && <ListItem key={-1} alignItems="flex-start">
+                <ListItemText primary={`No Results.`} primaryTypographyProps={{ variant: 'h6' }} />
+            </ListItem>}
 
-            </List>
-
-        </>
+        </List>
     )
 }
 

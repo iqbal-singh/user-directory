@@ -1,5 +1,4 @@
-import { Grid, LinearProgress, Typography } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Grid, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { allUsers, filterUsersByName } from '../../api/people';
 import UserList from './UserList';
@@ -9,7 +8,7 @@ function UserDirectoryContainer() {
     const [usersLoaded, setUsersLoaded] = useState(false);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState();
-    const mobile = false;
+
     useEffect(() => {
         setUsers(allUsers);
         setUsersLoaded(true);
@@ -22,29 +21,23 @@ function UserDirectoryContainer() {
         setUsers(filteredUsers);
     }
 
-    return (
-        <div className="App">
-            <Grid container spacing={mobile ? 2 : 0}>
-                <Grid item xs={12} align="left">
-                    <Typography variant="h5">User Directory</Typography>
-                    {!usersLoaded && <LinearProgress />}
-                </Grid>
-                <Grid item md={3} xs={12}>
-                    <UserList
-                        users={users}
-                        usersLoaded={usersLoaded}
-                        handleSearch={handleSearch}
-                        setSelectedUser={setSelectedUser}
-                        selectedUser={selectedUser}
-                        mobile={mobile}
-                    />
-                </Grid>
-                <Grid item md={9} xs={12}>
-                    <UserProfile user={selectedUser} />
-                </Grid>
-            </Grid>
-        </div>
-    );
+    return (<Grid container spacing={1} align="left">
+        <Grid item xs={12}>
+            {usersLoaded && <Typography variant="h5">User Directory</Typography>}
+        </Grid>
+        <Grid item md={4} xs={12}>
+            <UserList
+                users={users}
+                usersLoaded={usersLoaded}
+                handleSearch={handleSearch}
+                setSelectedUser={setSelectedUser}
+                selectedUser={selectedUser}
+            />
+        </Grid>
+        <Grid item md={8} xs={12}>
+            <UserProfile user={selectedUser} />
+        </Grid>
+    </Grid>);
 }
 
 export default UserDirectoryContainer;
