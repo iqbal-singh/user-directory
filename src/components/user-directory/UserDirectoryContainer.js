@@ -5,51 +5,26 @@ import { allUsers, filterUsersByName } from '../../api/people';
 import UserList from './UserList';
 import UserProfile from './UserProfile';
 
-function UserDirectory() {
+function UserDirectoryContainer() {
     const [usersLoaded, setUsersLoaded] = useState(false);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState();
-    const [previousSearchResults, setPreviousSearchResults] = useState(new Map());
-    const mobile = useMediaQuery('(max-width:950px)');
+    const mobile = false;
     useEffect(() => {
         setUsers(allUsers);
         setUsersLoaded(true);
         setSelectedUser(allUsers[0])
     }, []);
 
-    function updatePreviousSearchResults(k, v) {
-        setPreviousSearchResults(new Map(previousSearchResults.set(k, v)));
-    }
-
     function handleSearch(e) {
         const searchQuery = e.target.value.trim();
-        if (previousSearchResults.get(searchQuery)) {
-            setUsers(previousSearchResults.get(searchQuery));
-        }
-        else
-            if (searchQuery.length > 2) {
-                const filteredUsers = filterUsersByName(searchQuery);
-                setUsers(filteredUsers);
-                updatePreviousSearchResults(searchQuery, filteredUsers);
-            }
-            else {
-                setUsers(allUsers);
-            }
+        const filteredUsers = filterUsersByName(searchQuery);
+        setUsers(filteredUsers);
     }
 
     return (
         <div className="App">
             <Grid container spacing={mobile ? 2 : 0}>
-                {/* 
-                // Link to login activity compponent
-                <Grid item xs={12} style={{height:'1px'}} align="right" >
-                    <Tooltip title="Login Activity Dashboard" placement="left">
-                        <Link to='/login-activity'><IconButton size="small">
-                            <InsertChartIcon></InsertChartIcon>
-                        </IconButton>
-                        </Link>
-                    </Tooltip>
-                </Grid> */}
                 <Grid item xs={12} align="left">
                     <Typography variant="h5">User Directory</Typography>
                     {!usersLoaded && <LinearProgress />}
@@ -72,4 +47,4 @@ function UserDirectory() {
     );
 }
 
-export default UserDirectory;
+export default UserDirectoryContainer;
