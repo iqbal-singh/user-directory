@@ -1,8 +1,9 @@
 import { Avatar, InputAdornment, List, ListItem, ListItemAvatar, ListItemText, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ChangeEvent, FunctionComponent } from 'react';
+import IUser from '../../interfaces/IUser';
+
 const useStyles = makeStyles(theme => ({
     list: {
         height: '600px',
@@ -21,8 +22,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function UserList({ users, usersLoaded, selectedUser, setSelectedUser, handleSearch }) {
+type UserListProps = {
+    users: IUser[];
+    usersLoaded: boolean;
+    selectedUser: IUser | undefined;
+    setSelectedUser: (user: IUser | undefined) => void;
+    handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
+const UserList: FunctionComponent<UserListProps> = ({
+    users,
+    usersLoaded,
+    selectedUser,
+    setSelectedUser,
+    handleSearch,
+}) => {
     const classes = useStyles();
     return (
         <List className={classes.list}>
@@ -32,7 +46,7 @@ function UserList({ users, usersLoaded, selectedUser, setSelectedUser, handleSea
                         placeholder="Search"
                         variant="outlined"
                         size="small"
-                        onKeyUp={handleSearch}
+                        onChange={handleSearch}
                         InputProps={{
                             startAdornment: <InputAdornment position="end" ><SearchIcon /></InputAdornment>,
                         }}
@@ -45,7 +59,7 @@ function UserList({ users, usersLoaded, selectedUser, setSelectedUser, handleSea
                         alignItems="flex-start"
                         button
                         dense
-                        selected={user.id === selectedUser.id}
+                        selected={user.id === selectedUser?.id}
                         onClick={() => { setSelectedUser(user) }}>
                         <ListItemAvatar>
                             <Avatar>{user.initials}</Avatar>
@@ -66,12 +80,5 @@ function UserList({ users, usersLoaded, selectedUser, setSelectedUser, handleSea
     )
 }
 
-UserList.propTypes = {
-    users: PropTypes.array,
-    usersLoaded: PropTypes.bool,
-    selectedUser: PropTypes.object,
-    setSelectedUser: PropTypes.func,
-    handleSearch: PropTypes.func
-};
 
 export default UserList;
